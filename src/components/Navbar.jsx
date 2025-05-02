@@ -16,9 +16,12 @@ const Navbar = () => {
           <FaUser size={25} />
         </div>
 
-        <button className="btn btn-primary  px-3 py-2 bg-black text-white rounded-lg">
+        <Link
+          to={"/auth/login"}
+          className="cursor-pointer  px-5 py-2 bg-black text-white rounded-lg"
+        >
           Login
-        </button>
+        </Link>
       </div>
     </div>
   );
