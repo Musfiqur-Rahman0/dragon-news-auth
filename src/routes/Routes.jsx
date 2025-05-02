@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import HomeLayout from "../Layouts/HomeLayout";
 import CategoryNews from "../pages/CategoryNews";
-import News from "../components/News";
+import Home from "../pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: News,
+        Component: Home,
       },
       {
         path: "/category/:id",
