@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import RightAside from "./sidebar/RightAside";
-import { useLoaderData, useParams } from "react-router";
+import { Link, useLoaderData, useParams } from "react-router";
 
 const NewsDetails = () => {
   const { newsId } = useParams();
@@ -10,7 +10,7 @@ const NewsDetails = () => {
   const data = useLoaderData();
 
   const singleNews = data.find((news) => news.id === newsId);
-  console.log(singleNews);
+  // console.log(singleNews);
   return (
     <div>
       <header>
@@ -25,9 +25,12 @@ const NewsDetails = () => {
             </figure>
             <h2 className="text-3xl font-semibold">{singleNews?.title}</h2>
             <p>{singleNews?.details}</p>
-            <button className="flex items-center px-5 py-2 rounded-lg bg-red-500 cursor-pointer font-semibold text-white">
+            <Link
+              to={`/category/${singleNews.category_id}`}
+              className="w-fit flex items-center px-5 py-2 rounded-lg bg-red-500 cursor-pointer font-semibold text-white"
+            >
               All Category news here
-            </button>
+            </Link>
           </div>
         </div>
         <div className="col-span-3">

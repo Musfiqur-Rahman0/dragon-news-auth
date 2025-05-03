@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router";
+import { useLoaderData, useNavigation, useParams } from "react-router";
 import NewsCard from "../components/NewsCard";
+import Loader from "../components/Loader";
 
 const CategoryNews = () => {
   const data = useLoaderData();
+
   const [category, setCategory] = useState([]);
 
   const { id } = useParams();
+
+  const { state } = useNavigation();
 
   useEffect(() => {
     if (id == 0) {
@@ -26,10 +30,12 @@ const CategoryNews = () => {
   return (
     <div>
       <h2 className="text-xl font-semibold"> Dragon News Home</h2>
-      <div className="space-y-5 mt-5">
-        {category.map((ctNews, i) => (
-          <NewsCard key={i} news={ctNews} />
-        ))}
+      <div className="space-y-5 mt-5 ">
+        {state === "loading" ? (
+          <Loader />
+        ) : (
+          category.map((ctNews, i) => <NewsCard key={i} news={ctNews} />)
+        )}
       </div>
     </div>
   );

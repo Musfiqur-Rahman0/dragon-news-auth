@@ -7,12 +7,15 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import NewsDetails from "../components/NewsDetails";
+import ProtectedRoute from "./ProtectedRoute";
+import Loader from "../components/Loader";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: HomeLayout,
-    hydrateFallbackElement: <p>Loading...</p>,
+    loader: () => fetch("/news.json"),
+    hydrateFallbackElement: <Loader />,
     children: [
       {
         index: true,
@@ -42,7 +45,11 @@ const router = createBrowserRouter([
   {
     path: "/news-details/:newsId",
     loader: () => fetch("/news.json"),
-    element: <NewsDetails />,
+    element: (
+      <ProtectedRoute>
+        <NewsDetails />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "*",

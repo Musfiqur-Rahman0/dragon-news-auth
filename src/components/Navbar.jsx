@@ -1,11 +1,21 @@
-import React from "react";
+import React, { use } from "react";
 import { FaUser } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../context/AuthContext";
+import useAuth from "../hook/useAuth";
 
 const Navbar = () => {
+  const { user, setUser } = use(AuthContext);
+  const { logout } = useAuth();
+
+  // const handleLogout = () => {
+  //   logout();
+  //   console.log("user loged out!");
+  // };
+  // console.log(user);
   return (
     <div className="flex justify-between items-center">
-      <div className=""></div>
+      <div className="">{user ? user.email : ""}</div>
       <div className="nav flex gap-5 text-accent">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
@@ -16,12 +26,21 @@ const Navbar = () => {
           <FaUser size={25} />
         </div>
 
-        <Link
-          to={"/auth/login"}
-          className="cursor-pointer  px-5 py-2 bg-black text-white rounded-lg"
-        >
-          Login
-        </Link>
+        {user ? (
+          <button
+            onClick={logout}
+            className="cursor-pointer  px-5 py-2 bg-black text-white rounded-lg"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to={"/auth/login"}
+            className="cursor-pointer  px-5 py-2 bg-black text-white rounded-lg"
+          >
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

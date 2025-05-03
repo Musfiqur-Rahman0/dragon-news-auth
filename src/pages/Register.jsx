@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useInputValue from "../hook/useInputValue";
+import useAuth from "../hook/useAuth";
 
 const Register = () => {
   const [name, setName] = useInputValue("");
@@ -13,9 +14,21 @@ const Register = () => {
     urlError: "",
   });
 
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+
   const handleSingInForm = (e) => {
     e.preventDefault();
-    console.log("form submited!!");
+
+    const userdata = {
+      name,
+      email,
+      password,
+      photoURL,
+    };
+    signIn(email, password);
+    navigate("/auth/login");
+    console.log("sign in successfull!!");
   };
 
   return (

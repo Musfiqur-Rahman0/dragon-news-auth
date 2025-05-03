@@ -1,10 +1,10 @@
 import React, { use } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigation } from "react-router";
 const categoryPromise = fetch("/categories.json").then((res) => res.json());
 
 const Categories = () => {
   const categoryData = use(categoryPromise);
-  console.log(categoryData);
+
   return (
     <div>
       <h2 className="text-xl font-semibold "> All Category</h2>
